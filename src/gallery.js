@@ -36,4 +36,5 @@ function galleryRender(photos) {
     .join('');
   contGall.insertAdjacentHTML('beforeend', markup);
 }
+
 export { galleryRender };

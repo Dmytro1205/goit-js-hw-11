@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchImages } from './images';
-import gallery, { galleryRender, refresh  } from './gallery';
+import { galleryRender } from './gallery';
 
 const form = document.querySelector('#search-form');
 const contGall = document.querySelector('.gallery');
@@ -59,9 +59,8 @@ async function getImages(query, page) {
     pageFetch += 1;
     observer.observe(guard);
 
-    refresh();
-  } 
-  catch (error) {
+    gallery.refresh();
+  } catch (error) {
     console.log(error);
     Notiflix.Notify.failure(
       `Ooops... Something goes wrong. Please, try again.`
@@ -81,6 +80,7 @@ function handleSubmit(e) {
   pageFetch = 1;
   contGall.innerHTML = '';
 
+  //знимаємо старий observer при новому запиті
   observer.unobserve(guard);
 
   getImages(queryFetch, pageFetch);
